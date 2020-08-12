@@ -22,13 +22,22 @@ class Event(commands.Cog):
     #     await channel.send(f"{member} leave!")  # 輸出文字
 
     @commands.Cog.listener()
-    async def on_message(self, msg:str):  # 成員離開觸發
+    async def on_message(self, msg:str):
         if msg.content.find('你們打') >= 0 and msg.author != self.bot.user:
             await msg.channel.send(f"馬的又我們打 都我們打就好啦!")
-    @commands.Cog.listener()
-    async def on_message(self, msg: str):  # 成員離開觸發
         if msg.content.find('你們先打') >= 0 and msg.author != self.bot.user:
+            await msg.channel.send(f"等等最好給我上線喔!")
+        if msg.content.find('我不打') >= 0 and msg.author != self.bot.user:
             await msg.channel.send(f"好扯喔!")
+        if msg.content.find('西瓜') >= 0 and msg.author != self.bot.user:
+            await msg.channel.send(file=discord.File("D:\\code\\Python\\github\\RJ_Bot\\image\\JPEG_20200714_235934.jpg"))
+
+    # @commands.Cog.listener()
+    # async def on_message(self, msg: str):
+    #     if msg.content.find('西瓜') >= 0 and msg.author != self.bot.user:
+    #         await msg.channel.send(file=discord.File("D:\\code\\Python\\github\\RJ_Bot\\image\\JPEG_20200714_235934.jpg"))
 
 def setup(bot):
     bot.add_cog(Event(bot))
+
+
