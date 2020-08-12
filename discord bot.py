@@ -8,46 +8,30 @@ import requests
 with open("D:\\code\\Python\\setting.json", 'r', encoding='utf-8') as jfile:  # 載入json
     jdata = json.load(jfile)
 
-bot = commands.Bot(command_prefix='/')#起手字元
+bot = commands.Bot(command_prefix='/')  # 起手字元
+
 
 @bot.event
 async def on_ready():  # 機器人啟動觸發
     print(">> Bot is online <<")
 
+
 @bot.command()
 async def load(ctx, codes):  # 載入
     bot.load_extension(f"codes.{codes}")
     await ctx.send(f"{codes}已成功load!")
+
+
 @bot.command()
 async def unload(ctx, codes):  # 卸載
     bot.unload_extension(f"codes.{codes}")
     await ctx.send(f"{codes}已成功unload!")
+
+
 @bot.command()
 async def reload(ctx, codes):  # 重新載入
     bot.reload_extension(f"codes.{codes}")
     await ctx.send(f"{codes}已成功reload!")
-
-url = "https://opendata.cwb.gov.tw/api/v1/rest/datastore/E-A0016-001?Authorization=rdec-key-123-45678-011121314"#爬蟲 爬地震API
-res = requests.get(url).text
-data = json.loads(res)["records"]["earthquake"][0]
-
-@bot.command()
-async def tv(ctx):
-    if data["earthquakeInfo"]["magnitude"]["magnitudeValue"] < 4:
-        ptcolor = "https://imgur.com/StZHCvA.png"
-    if 4 <= data["earthquakeInfo"]["magnitude"]["magnitudeValue"]<6:
-        ptcolor = "https://imgur.com/Fr0jwOq.png"
-    if 6 <= data["earthquakeInfo"]["magnitude"]["magnitudeValue"]:
-        ptcolor = "https://imgur.com/ksyQhIm.png"
-    embed = discord.Embed(title=data["reportType"],description=data["reportContent"], color=0xfdd408, timestamp=dt.datetime.utcnow())
-    embed.add_field(name="規模:", value="芮氏"+str(data["earthquakeInfo"]["magnitude"]["magnitudeValue"]), inline=False)
-    embed.set_author(name=data["reportType"], icon_url=ptcolor)
-    embed.set_image(url=data["reportImageURI"])
-    embed.set_footer(text="臺灣交通部中央氣象局提供",
-                     icon_url="https://imgur.com/NKP107p.png")
-    await ctx.send(embed=embed)
-
-
 
 # with open("github\\RJ_Bot\\DATA.json", "w", encoding="utf-8") as f:
 #     json.dump(data, f)
@@ -57,10 +41,9 @@ async def tv(ctx):
 #     # round為四捨五入 ctx指當前頻道觸發人的各種資料
 #     await ctx.send(f"機器人延遲 {round(bot.latency*1000)}ms")
 
-for filename in os.listdir('./codes'):#啟動機器人時 載入所有檔案
+for filename in os.listdir('./codes'):  # 啟動機器人時 載入所有檔案
     if filename.endswith('.py'):
         bot.load_extension(f"codes.{filename[:-3]}")
 
 if __name__ == "__main__":
     bot.run(jdata['TOKEN'])
-

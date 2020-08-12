@@ -29,6 +29,8 @@ class Event(commands.Cog):
             await msg.channel.send(f"等等最好給我上線喔!")
         if msg.content.find('我不打') >= 0 and msg.author != self.bot.user:
             await msg.channel.send(f"好扯喔!")
+        if msg.content.find('有培因') >= 0 and msg.author != self.bot.user:
+            await msg.channel.send(f"你有感受過痛楚嗎?")
         if msg.content.find('西瓜') >= 0 and msg.author != self.bot.user:
             await msg.channel.send(file=discord.File("D:\\code\\Python\\github\\RJ_Bot\\image\\JPEG_20200714_235934.jpg"))
 
