@@ -5,7 +5,7 @@ import random
 import datetime as dt
 import os
 import requests
-with open("setting.json", 'r', encoding='utf-8') as jfile:  # 載入json
+with open("D:\\code\\Python\\setting.json", 'r', encoding='utf-8') as jfile:  # 載入json
     jdata = json.load(jfile)
 
 bot = commands.Bot(command_prefix='/')#起手字元
@@ -27,24 +27,26 @@ async def reload(ctx, codes):  # 重新載入
     bot.reload_extension(f"codes.{codes}")
     await ctx.send(f"{codes}已成功reload!")
 
+url = "https://opendata.cwb.gov.tw/api/v1/rest/datastore/E-A0016-001?Authorization=rdec-key-123-45678-011121314"#爬蟲 爬地震API
+res = requests.get(url).text
+data = json.loads(res)["records"]["earthquake"][0]
+
 @bot.command()
 async def tv(ctx):
-    imag1 = "https://imgur.com/StZHCvA.png"
-    imag2 = "https://imgur.com/Fr0jwOq"
-    imag3 = "https://imgur.com/ksyQhIm"
+    imag = ["https://imgur.com/StZHCvA.png",
+            "https://imgur.com/Fr0jwOq", "https://imgur.com/ksyQhIm"]
     if data["earthquakeInfo"]["magnitude"]["magnitudeValue"] < 4:
-        ptcolor=imag1
-    embed = discord.Embed(title=data["reportType"], url="https://reurl.cc/nzaord",description="完整清單(點標題)", color=0xfdd408, timestamp=dt.datetime.utcnow())
+        ptcolor=imag[0]
+    embed = discord.Embed(title=data["reportType"], url="https://reurl.cc/nzaord",
+                          description=data["reportContent"], color=0xfdd408, timestamp=dt.datetime.utcnow())
     embed.add_field(name="規模:", value="芮氏"+str(data["earthquakeInfo"]["magnitude"]["magnitudeValue"]), inline=False)
-    embed.set_author(name=data["reportType"])
+    embed.set_author(name=data["reportType"], icon_url=ptcolor)
     embed.set_image(url=data["reportImageURI"])
     embed.set_footer(text="臺灣交通部中央氣象局提供",
                      icon_url="https://imgur.com/NKP107p.png")
     await ctx.send(embed=embed)
 
-url = "https://opendata.cwb.gov.tw/api/v1/rest/datastore/E-A0016-001?Authorization=rdec-key-123-45678-011121314"
-res = requests.get(url).text
-data = json.loads(res)["records"]["earthquake"][0]
+
 
 # with open("github\\RJ_Bot\\DATA.json", "w", encoding="utf-8") as f:
 #     json.dump(data, f)
