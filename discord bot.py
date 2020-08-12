@@ -29,10 +29,11 @@ async def reload(ctx, codes):  # 重新載入
 
 @bot.command()
 async def tv(ctx):
-    imag1 = "https: // imgur.com / StZHCvA.png"
-    imag2 =
-    imag3 =
-    if data["earthquakeInfo"]["magnitude"]["magnitudeValue"]<4
+    imag1 = "https://imgur.com/StZHCvA.png"
+    imag2 = "https://imgur.com/Fr0jwOq"
+    imag3 = "https://imgur.com/ksyQhIm"
+    if data["earthquakeInfo"]["magnitude"]["magnitudeValue"] < 4:
+        ptcolor=imag1
     embed = discord.Embed(title=data["reportType"], url="https://reurl.cc/nzaord",description="完整清單(點標題)", color=0xfdd408, timestamp=dt.datetime.utcnow())
     embed.add_field(name="規模:", value="芮氏"+str(data["earthquakeInfo"]["magnitude"]["magnitudeValue"]), inline=False)
     embed.set_author(name=data["reportType"])
