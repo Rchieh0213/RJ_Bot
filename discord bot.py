@@ -36,7 +36,11 @@ async def tv(ctx):
     imag = ["https://imgur.com/StZHCvA.png",
             "https://imgur.com/Fr0jwOq", "https://imgur.com/ksyQhIm"]
     if data["earthquakeInfo"]["magnitude"]["magnitudeValue"] < 4:
-        ptcolor=imag[0]
+        ptcolor = imag[0]
+    if 4 <= data["earthquakeInfo"]["magnitude"]["magnitudeValue"]<6:
+        ptcolor = imag[1]
+    if 6 <= data["earthquakeInfo"]["magnitude"]["magnitudeValue"]:
+        ptcolor = imag[2]
     embed = discord.Embed(title=data["reportType"], url="https://reurl.cc/nzaord",
                           description=data["reportContent"], color=0xfdd408, timestamp=dt.datetime.utcnow())
     embed.add_field(name="規模:", value="芮氏"+str(data["earthquakeInfo"]["magnitude"]["magnitudeValue"]), inline=False)
