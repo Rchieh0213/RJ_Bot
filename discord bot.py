@@ -5,7 +5,7 @@ import random
 import datetime as dt
 import os
 import requests
-with open("setting.json",'r',encoding='utf-8') as jfile:#載入json
+with open("setting.json", 'r', encoding='utf-8') as jfile:  # 載入json
     jdata = json.load(jfile)
 
 bot = commands.Bot(command_prefix='/')#起手字元
@@ -29,7 +29,7 @@ async def reload(ctx, codes):  # 重新載入
 
 @bot.command()
 async def tv(ctx):
-    imag1 =
+    imag1 = "https: // imgur.com / StZHCvA.png"
     imag2 =
     imag3 =
     if data["earthquakeInfo"]["magnitude"]["magnitudeValue"]<4
