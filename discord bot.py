@@ -17,19 +17,19 @@ async def on_ready():  # 機器人啟動觸發
 
 
 @bot.command()
-async def load(ctx, codes):  # 載入
+async def l(ctx, codes):  # 載入
     bot.load_extension(f"codes.{codes}")
     await ctx.send(f"{codes}已成功load!")
 
 
 @bot.command()
-async def unload(ctx, codes):  # 卸載
+async def unl(ctx, codes):  # 卸載
     bot.unload_extension(f"codes.{codes}")
     await ctx.send(f"{codes}已成功unload!")
 
 
 @bot.command()
-async def reload(ctx, codes):  # 重新載入
+async def rel(ctx, codes):  # 重新載入
     bot.reload_extension(f"codes.{codes}")
     await ctx.send(f"{codes}已成功reload!")
 

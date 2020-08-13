@@ -33,12 +33,13 @@ class Event(commands.Cog):
             await msg.channel.send(f"你有感受過痛楚嗎?")
         if msg.content.find('西瓜') >= 0 and msg.author != self.bot.user:
             await msg.channel.send(file=discord.File("D:\\code\\Python\\github\\RJ_Bot\\image\\JPEG_20200714_235934.jpg"))
+        if msg.content.find('晚點') >= 0 and msg.author != self.bot.user:
+            await msg.channel.send(f"再晚點就要睡啦!")
 
-    # @commands.Cog.listener()
-    # async def on_message(self, msg: str):
-    #     if msg.content.find('西瓜') >= 0 and msg.author != self.bot.user:
-    #         await msg.channel.send(file=discord.File("D:\\code\\Python\\github\\RJ_Bot\\image\\JPEG_20200714_235934.jpg"))
-
+    @commands.Cog.listener()
+    async def on_command_error(self,ctx,error):
+        await ctx.send(error)
+        
 def setup(bot):
     bot.add_cog(Event(bot))
 
