@@ -57,12 +57,12 @@ class Commands(commands.Cog):
         else:
             earthquakeNo = str(data["earthquakeNo"] % 100)
         ttme=dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        embed = discord.Embed(title="⚠⚠⚠",description=">"+data["reportContent"][11::], color=color_,)  # timestamp=
+        embed = discord.Embed(color=color_,)  # timestamp=
         embed.add_field(name="編號:", value=earthquakeNo, inline=True)
         embed.add_field(name="規模:", value=f"{color_icon }" + u'\uFE0E' + f" 芮氏 **{MLdata}** `({ML})`", inline=True)
-        embed.add_field(name="發生時間:", value="`"+data["earthquakeInfo"]["originTime"]+"`", inline=False)
+        embed.add_field(name="發生時間:", value=""+data["earthquakeInfo"]["originTime"]+"", inline=False)
         embed.add_field(name="震央位置:", value=data["earthquakeInfo"]["epiCenter"]["location"], inline=False)
-        embed.set_author(name=data["reportType"], icon_url=ptcolor)#開頭作者
+        embed.set_author(name=data["reportType"]+"(詳情請點我)",url=data["web"], icon_url=ptcolor)  # 開頭作者
         embed.set_image(url=data["reportImageURI"])#地震報告圖片
         embed.set_footer(text=f"臺灣交通部中央氣象局提供 ▪ 發布時間：{ttme}", icon_url="https://imgur.com/NKP107p.png")
         await ctx.send(embed=embed)
